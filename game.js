@@ -13,7 +13,10 @@ const flapSounds = [
     new Audio('sounds/flapsound1.mp3'),
     new Audio('sounds/flapsound2.mp3')
 ];
-const endSound = new Audio('sounds/endsound.mp3');
+const endSounds = [
+    new Audio('sounds/endsound1.mp3'),
+    new Audio('sounds/endsound2.mp3')
+];
 
 // Hàm phát âm thanh flap ngẫu nhiên
 function playRandomFlapSound() {
@@ -22,10 +25,11 @@ function playRandomFlapSound() {
     randomSound.play();
 }
 
-// Hàm phát âm thanh kết thúc
-function playEndSound() {
-    endSound.currentTime = 0;
-    endSound.play();
+// Hàm phát âm thanh kết thúc ngẫu nhiên
+function playRandomEndSound() {
+    const randomEndSound = endSounds[Math.floor(Math.random() * endSounds.length)];
+    randomEndSound.currentTime = 0;
+    randomEndSound.play();
 }
 
 // Tải ảnh background
@@ -253,7 +257,7 @@ function update() {
     if (checkCollision()) {
         gameOver = true;
         updateHighScore();
-        playEndSound(); // Phát âm thanh khi thua
+        playRandomEndSound(); // Thay đổi từ playEndSound sang playRandomEndSound
     }
 }
 
