@@ -1,5 +1,37 @@
 const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d', { alpha: false });
+// Thêm hỗ trợ UTF-8 cho canvas
+ctx.textBaseline = 'middle';
+ctx.textRendering = 'optimizeLegibility';
+
+// Tải font trước khi sử dụng
+const font = new FontFace('VT323', 'url(https://fonts.gstatic.com/s/vt323/v17/pxiKyp0ihIEF2isfFJA.woff2)');
+font.load().then(function(loadedFont) {
+    document.fonts.add(loadedFont);
+}).catch(function(error) {
+    console.error('Lỗi tải font:', error);
+});
+
+// Hàm vẽ text với UTF-8
+function drawUTF8Text(text, x, y, fontSize, color = '#FFF', withShadow = true) {
+    ctx.font = `${fontSize}px 'VT323'`;
+    ctx.textAlign = 'center';
+    
+    if (withShadow) {
+        // Vẽ outline
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 3;
+        ctx.strokeText(text, x, y);
+        
+        // Vẽ shadow
+        ctx.fillStyle = '#000';
+        ctx.fillText(text, x + 2, y + 2);
+    }
+    
+    // Vẽ text chính
+    ctx.fillStyle = color;
+    ctx.fillText(text, x, y);
+}
 
 // Elements
 const playerForm = document.getElementById('playerForm');
@@ -198,14 +230,16 @@ function drawPipes() {
 function drawGameOver() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+    // Game Over
+    drawUTF8Text('Game Over!', GAME_WIDTH / 2, GAME_HEIGHT / 2 - 50, 48);
     
-    ctx.fillStyle = '#FFF';
-    ctx.font = '48px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Game Over!', GAME_WIDTH / 2, GAME_HEIGHT / 2 - 50);
-    ctx.font = '24px Arial';
-    ctx.fillText(`${playerName} - Điểm cuối: ${score}`, GAME_WIDTH / 2, GAME_HEIGHT / 2);
-    ctx.fillText('Nhấn SPACE để chơi lại', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 40);
+    // Điểm số
+    drawUTF8Text(playerName, GAME_WIDTH / 2, GAME_HEIGHT / 2, 32);
+    drawUTF8Text(`Điểm cuối: ${score}`, GAME_WIDTH / 2, GAME_HEIGHT / 2 + 40, 32);
+    
+    // Hướng dẫn
+    drawUTF8Text('Nhấn SPACE để chơi lại', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 80, 24);
 }
 
 // Kiểm tra va chạm
@@ -271,10 +305,8 @@ function draw() {
     }
 
     if (!playerName) {
-        ctx.fillStyle = '#FFF';
-        ctx.font = '24px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Vui lòng nhập tên để bắt đầu', GAME_WIDTH / 2, GAME_HEIGHT / 2);
+        drawUTF8Text('Vui lòng nhập tên để bắt đầu', 
+            GAME_WIDTH / 2, GAME_HEIGHT / 2 + 200, 32);
         return;
     }
 
@@ -284,10 +316,8 @@ function draw() {
     if (gameOver) {
         drawGameOver();
     } else if (!gameStarted) {
-        ctx.fillStyle = '#FFF';
-        ctx.font = '24px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Nhấn SPACE để bắt đầu', GAME_WIDTH / 2, GAME_HEIGHT / 2);
+        drawUTF8Text('Nhấn SPACE để bắt đầu', 
+            GAME_WIDTH / 2, GAME_HEIGHT / 2, 32);
     }
 }
 
