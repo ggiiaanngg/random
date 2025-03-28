@@ -2,6 +2,10 @@
 
 Game Flappy Bird được phát triển bằng HTML5 Canvas và JavaScript.
 
+## Demo
+
+Chơi game trực tiếp tại: https://ggiiaanngg.github.io/random/
+
 ## Tính năng
 
 - Chọn nhân vật từ 5 hình ảnh khác nhau
@@ -25,12 +29,8 @@ Game Flappy Bird được phát triển bằng HTML5 Canvas và JavaScript.
 - CSS3
 - Local Storage cho điểm cao
 
-## Cài đặt
+## Cài đặt local
 
 1. Clone repository này
 2. Mở file index.html trong trình duyệt
-3. Bắt đầu chơi!
-
-## Demo
-
-Bạn có thể chơi game trực tiếp tại: [Link GitHub Pages sẽ được thêm sau khi deploy] 
+3. Bắt đầu chơi! 
