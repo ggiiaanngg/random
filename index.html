@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy Bird</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -14,7 +15,7 @@
             min-height: 100vh;
             background: #333;
             gap: 20px;
-            font-family: Arial, sans-serif;
+            font-family: 'VT323', monospace;
         }
         .game-container {
             display: flex;
@@ -85,7 +86,8 @@
             border-radius: 5px;
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
-            font-size: 16px;
+            font-size: 24px;
+            font-family: 'VT323', monospace;
             outline: none;
             width: 200px;
         }
@@ -99,7 +101,8 @@
             background: rgba(255, 255, 255, 0.3);
             color: #fff;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 24px;
+            font-family: 'VT323', monospace;
             transition: all 0.2s;
             white-space: nowrap;
         }
@@ -120,12 +123,15 @@
             text-align: center;
             margin: 0 0 15px 0;
             color: #FFD700;
+            font-size: 32px;
+            text-shadow: 2px 2px #000;
         }
         .current-score {
             text-align: center;
             margin-bottom: 10px;
             color: #FFD700;
-            font-size: 18px;
+            font-size: 28px;
+            text-shadow: 2px 2px #000;
         }
         .leaderboard-list {
             list-style: none;
@@ -137,6 +143,7 @@
             justify-content: space-between;
             padding: 8px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 24px;
         }
         .leaderboard-item:last-child {
             border-bottom: none;
@@ -193,9 +200,10 @@
                 padding: 15px;
             }
             
-            .player-form input {
-                width: 100%;
-                box-sizing: border-box;
+            .player-form input,
+            .player-form button {
+                font-size: 10px;
+                padding: 8px 12px;
             }
             
             .leaderboard {
@@ -205,7 +213,15 @@
             }
 
             .current-score {
-                font-size: 16px;
+                font-size: 12px;
+            }
+
+            .leaderboard h2 {
+                font-size: 14px;
+            }
+
+            .leaderboard-item {
+                font-size: 10px;
             }
 
             body {

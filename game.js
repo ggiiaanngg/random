@@ -20,12 +20,12 @@ function drawUTF8Text(text, x, y, fontSize, color = '#FFF', withShadow = true) {
     if (withShadow) {
         // Vẽ outline
         ctx.strokeStyle = '#000';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 2;
         ctx.strokeText(text, x, y);
         
         // Vẽ shadow
         ctx.fillStyle = '#000';
-        ctx.fillText(text, x + 2, y + 2);
+        ctx.fillText(text, x + 1, y + 1);
     }
     
     // Vẽ text chính
@@ -232,14 +232,14 @@ function drawGameOver() {
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     // Game Over
-    drawUTF8Text('Game Over!', GAME_WIDTH / 2, GAME_HEIGHT / 2 - 50, 48);
+    drawUTF8Text('Game Over!', GAME_WIDTH / 2, GAME_HEIGHT / 2 - 60, 48);
     
     // Điểm số
-    drawUTF8Text(playerName, GAME_WIDTH / 2, GAME_HEIGHT / 2, 32);
-    drawUTF8Text(`Điểm cuối: ${score}`, GAME_WIDTH / 2, GAME_HEIGHT / 2 + 40, 32);
+    drawUTF8Text(playerName, GAME_WIDTH / 2, GAME_HEIGHT / 2, 36);
+    drawUTF8Text(`Điểm: ${score}`, GAME_WIDTH / 2, GAME_HEIGHT / 2 + 40, 36);
     
     // Hướng dẫn
-    drawUTF8Text('Nhấn SPACE để chơi lại', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 80, 24);
+    drawUTF8Text('Nhấn SPACE để chơi lại', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 80, 32);
 }
 
 // Kiểm tra va chạm
@@ -306,7 +306,7 @@ function draw() {
 
     if (!playerName) {
         drawUTF8Text('Vui lòng nhập tên để bắt đầu', 
-            GAME_WIDTH / 2, GAME_HEIGHT / 2 + 200, 32);
+            GAME_WIDTH / 2, GAME_HEIGHT / 2 + 200, 36);
         return;
     }
 
@@ -317,7 +317,7 @@ function draw() {
         drawGameOver();
     } else if (!gameStarted) {
         drawUTF8Text('Nhấn SPACE để bắt đầu', 
-            GAME_WIDTH / 2, GAME_HEIGHT / 2, 32);
+            GAME_WIDTH / 2, GAME_HEIGHT / 2, 36);
     }
 }
 
