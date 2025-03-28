@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #333;
+            gap: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .game-container {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .game-section {
+            position: relative;
+        }
+        canvas {
+            border: 2px solid #fff;
+        }
+        .bird-picker {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .bird-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .bird-option:hover {
+            transform: scale(1.1);
+        }
+        .bird-option.selected {
+            border: 3px solid #fff;
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .bird-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .player-form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+        }
+        .player-form input {
+            padding: 10px 15px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            width: 200px;
+        }
+        .player-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .player-form button {
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        .player-form button:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .leaderboard {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            color: #fff;
+            min-width: 300px;
+        }
+        .leaderboard h2 {
+            text-align: center;
+            margin: 0 0 15px 0;
+            color: #FFD700;
+        }
+        .current-score {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #FFD700;
+            font-size: 18px;
+        }
+        .leaderboard-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+        .leaderboard-rank {
+            color: #FFD700;
+            font-weight: bold;
+            width: 30px;
+        }
+        .leaderboard-name {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .leaderboard-score {
+            font-weight: bold;
+            color: #4EC0CA;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-section">
+            <div class="bird-picker">
+                <div class="bird-option selected" data-bird="bird1">
+                    <img src="images/bird1.png" alt="Bird 1">
+                </div>
+                <div class="bird-option" data-bird="bird2">
+                    <img src="images/bird2.png" alt="Bird 2">
+                </div>
+                <div class="bird-option" data-bird="bird3">
+                    <img src="images/bird3.png" alt="Bird 3">
+                </div>
+                <div class="bird-option" data-bird="bird4">
+                    <img src="images/bird4.png" alt="Bird 4">
+                </div>
+                <div class="bird-option" data-bird="bird5">
+                    <img src="images/bird5.png" alt="Bird 5">
+                </div>
+            </div>
+            <canvas id="gameCanvas" width="480" height="640"></canvas>
+            <div class="player-form" id="playerForm">
+                <input type="text" id="playerName" placeholder="Nhập tên của bạn" maxlength="20">
+                <button id="startGame">Bắt đầu chơi</button>
+            </div>
+        </div>
+        <div class="leaderboard">
+            <div class="current-score">
+                Điểm số hiện tại: <span id="currentScore">0</span>
+            </div>
+            <h2>Bảng Xếp Hạng</h2>
+            <div class="leaderboard-list" id="leaderboardList">
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
